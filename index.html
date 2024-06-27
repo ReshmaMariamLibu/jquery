@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dog Image</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>Dog Image</h1>
+    <button id="fetchImage">Click here</button>
+    <div id="imageContainer">
+        <img id="dogImage" src="" alt="Random Dog" style="max-width: 100%; height: auto; margin-top: 20px;">
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            function fetchDogImage() {
+                $.ajax({
+                    url: 'https://dog.ceo/api/breeds/image/random',
+                    method: 'GET',
+                    success: function(data) {
+                        $('#dogImage').attr('src', data.message);
+                    },
+                    error: function() {
+                        alert('Error fetching image');
+                    }
+                });
+            }
+
+            $('#fetchImage').on('click', function() {
+                fetchDogImage();
+            });
+
+            // Fetch an initial image on page load
+            fetchDogImage();
+        });
+    </script>
+</body>
+</html>
